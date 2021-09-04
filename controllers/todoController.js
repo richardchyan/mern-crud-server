@@ -11,7 +11,7 @@ const getAllTodos = (req, res) => {
       })
    }
 
-const getSingleTodo = (req, res ) => {
+const getSingleTodo = (req, res) => {
 
    let id = req.params.id;
    Todo.findById(id)
