@@ -25,7 +25,7 @@ export const signin = async (req, res) => {
       const token = jwt.sign({ email: existingUser.email, id: existingUser._id}, process.env.ACCESSTOKENKEY, {expiresIn: '1h'});
       
       //Send the user and token back as a response
-      res.status(200).json({ existingUser, token});
+      res.status(200).json({ profile: existingUser, token});
 
    } catch (error) {
       console.log(error);
@@ -59,7 +59,7 @@ export const signup = async (req, res) => {
       const token = jwt.sign({ email: newUser.email, id: newUser._id}, process.env.ACCESSTOKENKEY, { expiresIn: '1h'});
 
       // Then send BOTH the newUser AND the token as a respoonse
-      res.status(200).json({ newUser, token });
+      res.status(200).json({ profile: newUser, token });
 
    } catch (error) {
       console.log(error);

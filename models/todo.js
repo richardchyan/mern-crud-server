@@ -2,7 +2,6 @@ import mongoose from 'mongoose';
 
 // format for multiple properties on each field
 
-// const Schema = mongoose.Schema;
 // const todoSchema = new Schema({
 //    title: {
 //       type: String,
@@ -16,6 +15,7 @@ const todoSchema = mongoose.Schema({
    description: String,
    importance: String,
    completed: Boolean,
+   creator: String,
 
 }, {timestamps: true});
 

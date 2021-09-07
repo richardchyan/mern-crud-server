@@ -9,7 +9,8 @@ const getAllTodos = (req, res) => {
       .catch(error => {
          console.log(error);
       })
-   }
+}
+
 
 const getSingleTodo = (req, res) => {
 
@@ -26,9 +27,14 @@ const getSingleTodo = (req, res) => {
 
 const createTodo = (req, res) => {
 
-   let todo = new Todo(req.body);
+   const todo = req.body;
+   console.log(req);
+   console.log(req.userId);
+   console.log(req.email);
 
-   todo.save()
+   const newTodo = new Todo({ ...todo, creator: req.userId});
+
+   newTodo.save()
       .then(result => {
          res.status(200).json({ 'todo': 'success'})
       })
