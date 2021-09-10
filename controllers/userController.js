@@ -6,19 +6,18 @@ export const signin = async (req, res) => {
 
    const { email, password } = req.body;
 
-  
    try {
       
       const existingUser = await User.findOne({ email });
 
-      if(!existingUser) return res.status(400).json({ message:' That user does not exist'});
+      if(!existingUser) return res.status(400).json({ message:' That user does not exist. Please sign up for an account!'});
 
       // Use bcrypt to compare hash and inputted password
       // A simple if statement can't check because password is hashed
 
       const passwordCheck = await bcrypt.compare(password, existingUser.password);
 
-      if(!passwordCheck) return res.status(400).json({ message: 'That password is invalid!'})
+      if(!passwordCheck) return res.status(400).json({message: 'Your credentials do not match. Please try again.'})
 
       // Create a token that contains user info
 
@@ -46,8 +45,14 @@ export const signup = async (req, res) => {
 
       if(existingUser) return res.status(400).json({ message: 'User with that email already exists!'});
 
+      if(password.length < 6){
+         return res.status(400).json({ message: 'Passwords must be at least 6 characters long'})
+      } else if (password.length > 20){
+         return res.status(400).json({ message: 'Password is too long. Passwords must be 20 characters or less'})
+      }
+
       if(password !== confirmPassword){
-         return res.status(400).json({ message: 'Passwords do not match'});
+         return res.status(400).json({ message: 'The passwords do not match. Please try again'});
       }
       
       const hashedPassword = await bcrypt.hash(password, 12);

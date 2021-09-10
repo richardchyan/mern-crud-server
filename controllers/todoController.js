@@ -28,9 +28,6 @@ const getSingleTodo = (req, res) => {
 const createTodo = (req, res) => {
 
    const todo = req.body;
-   console.log(req);
-   console.log(req.userId);
-   console.log(req.email);
 
    const newTodo = new Todo({ ...todo, creator: req.userId});
 
