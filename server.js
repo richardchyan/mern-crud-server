@@ -18,7 +18,7 @@ app.use('/users', userRouter);
 
 // the greeting page for the deployed heroku server
 app.get('/', (req, res) => {
-   res.send('Hello, this is the todos API');
+   res.send('Test message');
 })
 
 const PORT = process.env.PORT || 4000;
